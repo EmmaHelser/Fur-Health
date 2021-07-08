@@ -10,5 +10,14 @@ module.exports = {
         res.status(201).send('Pet Added!')
       }
     })
+  },
+  retrievePets: (owner, res) => {
+    queries.getPets(owner, (err, data) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.status(202).send(data);
+      }
+    })
   }
 }

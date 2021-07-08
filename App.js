@@ -23,16 +23,18 @@ export default function App() {
   const addProfile = (newProfile) => {
     const option = {
       "method": 'post',
-      "url": 'http://192.168.0.5:3000/addPet',
+      "url": 'http://10.0.0.240:3000/addPet',
       "data": newProfile
     }
     axios(option)
       .then (response => {
-        console.log(response);
+        console.log(response.data);
       })
       .catch(err => {
         console.log(err);
       })
+
+      setNewUser(false);
   }
 
   return (

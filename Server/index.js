@@ -4,10 +4,14 @@ const port = 3000;
 const controller = require('./controller.js')
 
 app.use(express.json());
-app.listen(port, '192.168.0.5',(req, res) => {
+app.listen(port,(req, res) => {
   console.log('Listening on 3000!');
 })
 
 app.post('/addPet', (req, res) => {
   controller.addProfile(req.body, res);
+})
+
+app.get('/getPets/:ownerName', (req, res) => {
+  controller.retrievePets(req.params.ownerName, res);
 })
