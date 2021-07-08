@@ -5,7 +5,9 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "mysql": "mysql -u root -p < Database/schema.sql",
+    "server": "nodemon Server/index.js"
   },
   "dependencies": {
     "expo": "~42.0.0",
@@ -18,7 +20,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
-    "axios": "^0.21.1"
+    "axios": "^0.21.1",
+    "express": "^4.17.1"
   },
   "private": true
 }
