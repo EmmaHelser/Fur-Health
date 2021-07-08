@@ -2,7 +2,7 @@ DROP DATABASE IF EXISTS furHealth;
 
 CREATE DATABASE furHealth;
 
-USE DATABASE furHealth;
+USE furHealth;
 
 CREATE TABLE petProfiles (
   id INT AUTO_INCREMENT,
@@ -20,7 +20,7 @@ CREATE TABLE petProfiles (
 CREATE TABLE petWeightTracking (
   id INT AUTO_INCREMENT,
   petID INT,
-  weighDate DATE DEFAULT CURRENT_DATE,
+  weighDate DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   petWeight DECIMAL(2,2),
   PRIMARY KEY (id),
   FOREIGN KEY (petID) REFERENCES petProfiles(id)
@@ -38,7 +38,7 @@ CREATE TABLE dietAndMedications (
 CREATE TABLE vetVisits (
   id INT AUTO_INCREMENT,
   petID INT,
-  visitDate DATE NOT NULL DEFAULT CURRENT_DATE,
+  visitDate DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   visitNotes VARCHAR(1000) NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (petID) REFERENCES petProfiles(id)
@@ -52,4 +52,4 @@ CREATE TABLE exercise (
   exerciseType VARCHAR(100) NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (petID) REFERENCES petProfiles(id)
-)
+);

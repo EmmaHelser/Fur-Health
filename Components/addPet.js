@@ -1,13 +1,25 @@
 import React, {useState} from 'react';
 import {ScrollView, View, Text, Image, Picker, TextInput, StyleSheet, Button} from 'react-native';
 
-const AddPet = () => {
-  const [pet, setPet] = useState('');
+const AddPet = (props) => {
+  const [petType, setPetType] = useState('');
   const [birthday, setBirthday] = useState('');
   const [petName, setPetName] = useState('');
   const [petAge, setPetAge] = useState('');
   const [petFamily, setPetFamily] = useState('');
   const [petWeight, setPetWeight] = useState('');
+  const [petBreed, setPetBreed] = useState('');
+
+  const petProfile = {
+    petName: petName,
+    ownerName: props.user,
+    birthday: birthday,
+    age: petAge,
+    petWeight: petWeight,
+    family: petFamily,
+    petType: petType,
+    breed: petBreed
+  };
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -32,8 +44,8 @@ const AddPet = () => {
         <Text style={styles.inputLabel}>Type of Pet</Text>
         <Picker
           itemStyle={styles.petSelector}
-          selectedValue={pet}
-          onValueChange={selectedPet => setPet(selectedPet)}>
+          selectedValue={petType}
+          onValueChange={selectedPet => setPetType(selectedPet)}>
             <Picker.Item label='Cat' value='Cat'/>
             <Picker.Item label='Dog' value='Dog'/>
             <Picker.Item label='Rabbit' value='Rabbit'/>
@@ -42,6 +54,10 @@ const AddPet = () => {
       <View style={styles.petInfoSection}>
         <Text style={styles.inputLabel}>Weight</Text>
         <TextInput style={styles.inputArea} placeHolder='13lb'></TextInput>
+      </View>
+      <View style={styles.petInfoSection}>
+        <Text style={styles.inputLabel}>Breed</Text>
+        <TextInput style={styles.inputArea} placeHolder='American Shorthair'></TextInput>
       </View>
       <Button color='#000' title='Add My Pet!'></Button>
     </ScrollView>
