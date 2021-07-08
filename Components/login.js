@@ -9,18 +9,18 @@ const Login = (props) => {
     <View style={styles.container}>
       <Text>User</Text>
       <TextInput
-        placeHolder='Your Name'
+        placeholder='Your Name'
         onChangeText={name => setUser(name)}
         defaultValue={user}
       />
+      <Text>* If new user, fill in name, click new user, and then login</Text>
       <Pressable
         style={({pressed}) => [
           {
             backgroundColor: pressed
               ? 'rgb(210, 230, 255)'
               : 'white'
-          },
-          styles.newButton
+          }
         ]}
         onPressIn={press => setNewUser(true)}>
         <Text>New User</Text>

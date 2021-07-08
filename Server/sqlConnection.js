@@ -9,10 +9,10 @@ module.exports = {
   })
 };
 
-module.exports.con.getConnection((err) => {
-  if (!err) {
-    console.log('Server and database connected!');
-  } else {
-    console.log(err);
-  }
-});
+// module.exports.con.getConnection((err) => {
+//   if (!err) {
+//     console.log('Server and database connected!');
+//   } else {
+//     console.log(err);
+//   }
+// });
