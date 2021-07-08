@@ -6,7 +6,7 @@ const Login = (props) => {
   const [newUser, setNewUser] = useState(false);
 
   return (
-    <View>
+    <View style={styles.container}>
       <Text>User</Text>
       <TextInput
         placeHolder='Your Name'
@@ -25,7 +25,7 @@ const Login = (props) => {
         onPressIn={press => setNewUser(true)}>
         <Text>New User</Text>
       </Pressable>
-      <Button title='Login' onPress={() => props.loggingIn(user, newUser)} />
+      <Button color='black' title='Login' onPress={() => props.loggingIn(user, newUser)} />
     </View>
   )
 
@@ -36,6 +36,13 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     borderWidth: 1,
     padding: 10
+  },
+  container: {
+    backgroundColor: '#D0B6E1',
+    height: 250,
+    width: 200,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 })
 
