@@ -9,6 +9,5 @@ app.listen(port, '192.168.0.5',(req, res) => {
 })
 
 app.post('/addPet', (req, res) => {
-  console.log(req.body);
-  //controller.addProfile(req.body, res);
+  controller.addProfile(req.body, res);
 })
