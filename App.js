@@ -23,7 +23,7 @@ export default function App() {
   const addProfile = (newProfile) => {
     const option = {
       "method": 'post',
-      "url": 'http://10.0.0.240:3000/addPet',
+      "url": 'http://127.0.0.1:3000/addPet',
       "data": newProfile
     }
     axios(option)

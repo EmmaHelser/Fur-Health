@@ -10,9 +10,8 @@ const Home = (props) => {
 
   useEffect(() => {
     function getPets() {
-      axios.get(`http://10.0.0.240:3000/getPets/${props.user}`)
+      axios.get(`http://127.0.0.1:3000/getPets/${props.user}`)
       .then(response => {
-        console.log(response.data);
         setPetList(response.data);
       })
       .catch(err => {

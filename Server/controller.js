@@ -19,5 +19,14 @@ module.exports = {
         res.status(202).send(data);
       }
     })
+  },
+  gatherAllPetInfo: (owner, pet, res) => {
+    queries.getPetInfo(owner, pet, (err, data) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.status(202).send(data);
+      }
+    })
   }
 }

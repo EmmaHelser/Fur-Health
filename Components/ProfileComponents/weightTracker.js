@@ -10,7 +10,7 @@ export default function WeightTracker (props) {
 
   useEffect(() => {
     function getPastWeights() {
-      axios.get(`http://10.0.0.240:3000/getWeights/:petID`)
+      axios.get(`http://127.0.0.1:3000/getWeights/:petID`)
         .then(response => {
           console.log(response.data);
         })
@@ -30,10 +30,10 @@ export default function WeightTracker (props) {
       <Modal
         animationType="slide"
         transparent={true}
-        visible={modalVisible}
+        visible={modalOn}
         onRequestClose={() => {
           Alert.alert("Modal has been closed.");
-          setModalVisible(!modalVisible);
+          setModalVisible(!modalOn);
         }}
       >
 

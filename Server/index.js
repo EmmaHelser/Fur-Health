@@ -13,6 +13,9 @@ app.post('/addPet', (req, res) => {
 })
 
 app.get('/getPets/:ownerName', (req, res) => {
-  console.log('got request');
   controller.retrievePets(req.params.ownerName, res);
+})
+
+app.get('/getPetInfo/:user&:pet', (req, res) => {
+  controller.gatherAllPetInfo(req.params.user, req.params.pet, res);
 })

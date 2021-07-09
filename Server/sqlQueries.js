@@ -31,5 +31,14 @@ module.exports = {
         callback(null, data);
       }
     })
+  },
+  getPetInfo (ownerName, petName, callback) {
+    db.con.query(`SELECT * FROM pet_profiles WHERE owner_name='${ownerName}' AND pet_name='${petName}';`, (err, data) => {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, data);
+      }
+    })
   }
 }
