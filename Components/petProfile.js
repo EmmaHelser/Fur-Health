@@ -6,6 +6,9 @@ import WeightTracker from './ProfileComponents/weightTracker.js';
 const PetProfile = (props) => {
   const [petInfo, setPetInfo] = useState({});
   const [showWeights, setShowWeights] = useState(false);
+  const [showVet, setShowVet] = useState(false);
+  const [showExercise, setShowExercise] = useState(false);
+  const [showHealth, setShowHealth] = useState(false);
 
   useEffect(() => {
     function completePetInfo() {
@@ -20,6 +23,11 @@ const PetProfile = (props) => {
 
     completePetInfo()
   }, [])
+
+  const closeSection = () => {
+    setShowWeights(false);
+    setShowVet(false);
+  }
 
   return (
     <View style={styles.container}>
@@ -38,7 +46,7 @@ const PetProfile = (props) => {
         </View>
       </View>
       <Pressable style={styles.section} onPress={() => setShowWeights(true)}>
-        <WeightTracker pet={petInfo.pet_name} petID={petInfo.id} show={showWeights}/>
+        <WeightTracker pet={petInfo.pet_name} petID={petInfo.id} show={showWeights} close={closeSection}/>
       </Pressable>
       <View style={styles.section}>
         <Text>Health</Text>

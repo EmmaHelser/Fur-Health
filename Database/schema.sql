@@ -14,6 +14,7 @@ CREATE TABLE pet_profiles (
   pet_weight VARCHAR(6),
   weight_goal VARCHAR(10),
   goal_weight VARCHAR(10),
+  weight_status VARCHAR(30),
   family VARCHAR(100),
   petType ENUM('cat', 'dog', 'rabbit'),
   breed VARCHAR(50),

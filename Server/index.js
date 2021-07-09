@@ -23,3 +23,8 @@ app.get('/getPetInfo/:user&:pet', (req, res) => {
 app.get('/getWeights/:petID', (req, res) => {
   controller.getWeighIns(req.params.petID, res);
 })
+
+app.patch('/updateGoals/:petID', (req, res) => {
+  console.log(req.body);
+  controller.updateWeightGoals(req.params.petID, req.body, res);
+})

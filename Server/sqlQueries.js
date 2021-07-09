@@ -2,7 +2,7 @@ const db = require('./sqlConnection.js');
 
 module.exports = {
   createProfile (petName, ownerName, birthday, age, petGender,petWeight, family, petType, breed, callback) {
-    db.con.query(`INSERT INTO pet_profiles VALUES (null, '${petName}', '${ownerName}', '${birthday}', '${age}', '${petGender}', '${petWeight}', null, null, '${family}', '${petType}', '${breed}')`, (err, data) => {
+    db.con.query(`INSERT INTO pet_profiles VALUES (null, '${petName}', '${ownerName}', '${birthday}', '${age}', '${petGender}', '${petWeight}', null, null, null, '${family}', '${petType}', '${breed}')`, (err, data) => {
       if (err) {
         console.log(err);
       } else {
@@ -47,6 +47,15 @@ module.exports = {
         callback(err);
       } else {
         callback(null, data);
+      }
+    })
+  },
+  updateGoals (petID, weightGoal, goalWeight, status, callback) {
+    db.con.query(`UPDATE pet_profiles SET weight_goal='${weightGoal}', goal_weight='${goalWeight}', weight_status='status' WHERE id='${petID}';`, (err, success) => {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, success);
       }
     })
   }

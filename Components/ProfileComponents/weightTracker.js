@@ -1,11 +1,13 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, Modal, Pressable, StyleSheet, Button} from 'react-native';
+import {View, Text, Modal, Pressable, StyleSheet, Button, TextInput} from 'react-native';
 import axios from 'axios';
 import WeighIn from './weighIns.js';
+import AddGoals from './addWeightGoals.js';
 
 export default function WeightTracker (props) {
   const [weightGoal, setWeightGoal] = useState('');
   const [pastWeights, setPastWeights] = useState([]);
+  const [showGoals, setShowGoals] = useState(false);
 
   useEffect(() => {
     getPastWeights()
@@ -20,6 +22,10 @@ export default function WeightTracker (props) {
     .catch(err => {
       console.log(err);
     })
+  }
+
+  const closeGoals = () => {
+    setShowGoals(false);
   }
 
   return (
@@ -39,8 +45,20 @@ export default function WeightTracker (props) {
         }}
       >
         <View style={styles.container}>
-          <Button title='Back to Pet Profile'/>
+          <Button title='Back' onPress={() => props.close()}/>
           <Text style={styles.title}>Weight Tracker</Text>
+          <View style={styles.overview}>
+            <View>
+              <Text>Goals</Text>
+              <AddGoals close={closeGoals} show={showGoals} petID={props.petID}/>
+              <Button title='Add Goals' onPress={() => setShowGoals(true)}/>
+            </View>
+            <View>
+              <Text>Graph</Text>
+            </View>
+          </View>
+          <Text style={styles.add}>Add Weight</Text>
+          <TextInput></TextInput>
           <View style={styles.weightsList}>
             {pastWeights.map(weight => <WeighIn key={weight.weigh_date} weight={weight}/>)}
           </View>
@@ -53,9 +71,10 @@ export default function WeightTracker (props) {
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
     alignSelf: 'center',
+    marginTop: '10%',
     marginHorizontal: 50,
     backgroundColor: '#F7EDFE',
     height: '100%',
@@ -69,5 +88,21 @@ const styles = StyleSheet.create({
     fontSize: 30,
     alignItems: 'flex-start',
     marginBottom: 50
+  },
+  add: {
+    borderWidth: 3,
+    width: 300,
+    height: 37,
+    textAlign: 'center',
+    padding: 7
+  },
+  overview: {
+    flexDirection: 'row',
+    width: 300,
+    height: '25%',
+    margin: 10,
+    padding: '3%',
+    justifyContent: 'space-between',
+    borderWidth: 3
   }
 })

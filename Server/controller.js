@@ -16,7 +16,7 @@ module.exports = {
       if (err) {
         console.log(err);
       } else {
-        res.status(202).send(data);
+        res.status(200).send(data);
       }
     })
   },
@@ -25,7 +25,7 @@ module.exports = {
       if (err) {
         console.log(err);
       } else {
-        res.status(202).send(data);
+        res.status(200).send(data);
       }
     })
   },
@@ -34,7 +34,16 @@ module.exports = {
       if (err) {
         console.log(err);
       } else {
-        res.status(202).send(data);
+        res.status(200).send(data);
+      }
+    })
+  },
+  updateWeightGoals: (petID, goals, res) => {
+    queries.updateGoals(petID, goals.weightGoal, goals.goalWeight, goals.status, (err, success) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.status(200).send('Goals updated!');
       }
     })
   }
