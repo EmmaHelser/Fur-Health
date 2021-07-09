@@ -51,7 +51,7 @@ module.exports = {
     })
   },
   updateGoals (petID, weightGoal, goalWeight, status, callback) {
-    db.con.query(`UPDATE pet_profiles SET weight_goal='${weightGoal}', goal_weight='${goalWeight}', weight_status='status' WHERE id='${petID}';`, (err, success) => {
+    db.con.query(`UPDATE pet_profiles SET weight_goal='${weightGoal}', goal_weight='${goalWeight}', weight_status='${status}' WHERE id='${petID}';`, (err, success) => {
       if (err) {
         callback(err);
       } else {

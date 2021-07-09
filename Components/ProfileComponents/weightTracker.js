@@ -6,17 +6,21 @@ import AddGoals from './addWeightGoals.js';
 
 export default function WeightTracker (props) {
   const [weightGoal, setWeightGoal] = useState('');
+  const [goalWeight, setGoalWeight] = useState('');
+  const [weightStatus, setWeightStatus] = useState('');
   const [pastWeights, setPastWeights] = useState([]);
   const [showGoals, setShowGoals] = useState(false);
 
   useEffect(() => {
     getPastWeights()
+    setWeightGoal(props.pet.weight_goal);
+    setGoalWeight(props.pet.goal_weight);
+    setWeightStatus(props.pet.weight_status);
   }, [props.show])
 
   const getPastWeights = () => {
     axios.get(`http://127.0.0.1:3000/getWeights/${props.petID}`)
     .then(response => {
-      console.log(response.data);
       setPastWeights(response.data)
     })
     .catch(err => {
@@ -24,8 +28,11 @@ export default function WeightTracker (props) {
     })
   }
 
-  const closeGoals = () => {
+  const closeGoals = (newGoals) => {
     setShowGoals(false);
+    setWeightGoal(newGoals.weightGoal);
+    setGoalWeight(newGoals.goalWeight);
+    setWeightStatus(newGoals.status);
   }
 
   return (
@@ -49,7 +56,9 @@ export default function WeightTracker (props) {
           <Text style={styles.title}>Weight Tracker</Text>
           <View style={styles.overview}>
             <View>
-              <Text>Goals</Text>
+              <Text>Weight Goal: {weightGoal}</Text>
+              <Text>Goal Weight: {goalWeight}</Text>
+              <Text>Weight Status: {weightStatus}</Text>
               <AddGoals close={closeGoals} show={showGoals} petID={props.petID}/>
               <Button title='Add Goals' onPress={() => setShowGoals(true)}/>
             </View>

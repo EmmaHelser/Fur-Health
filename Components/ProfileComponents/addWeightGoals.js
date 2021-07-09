@@ -7,15 +7,11 @@ export default function AddGoals (props) {
   const [goalWeight, setGoalWeight] = useState('');
   const [status, setStatus] = useState('');
 
-  const updateGoals = () => {
+  const updateGoals = (newGoals) => {
     const option = {
       'method': 'patch',
       "url": `http://127.0.0.1:3000/updateGoals/${props.petID}`,
-      "data": {
-        weightGoal: weightGoal,
-        goalWeight: goalWeight,
-        status: status
-      }
+      "data": newGoals
     }
     axios(option)
     .then(response => {
@@ -26,9 +22,16 @@ export default function AddGoals (props) {
     })
   }
 
-  const close = () => {
-    updateGoals();
-    props.close();
+  const goals = {
+    weightGoal: weightGoal,
+    goalWeight: goalWeight,
+    status: status
+  }
+
+  async function close () {
+    let newGoals = await goals;
+    updateGoals(newGoals);
+    props.close(newGoals);
   }
 
   return (
@@ -55,7 +58,12 @@ export default function AddGoals (props) {
           <Picker.Item label='Maintain' value='Maintain'/>
         </Picker>
         <TextInput style={styles.inputLabel}>Goal Weight</TextInput>
-        <TextInput style={styles.inputArea}></TextInput>
+        <TextInput
+          style={styles.inputArea}
+          placeholder='10.5lb'
+          onChangeText={weight => setGoalWeight(weight)}
+          defaultValue={goalWeight}
+        ></TextInput>
         <Text style={styles.inputLabel}>Weight Status</Text>
         <Picker
           itemStyle={styles.petSelector}

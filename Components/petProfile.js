@@ -14,6 +14,7 @@ const PetProfile = (props) => {
     function completePetInfo() {
       axios.get(`http://127.0.0.1:3000/getPetInfo/${props.user}&${props.pet.pet_name}`)
         .then(response => {
+          console.log(response.data);
           setPetInfo(response.data[0]);
         })
         .catch(err => {
@@ -46,7 +47,7 @@ const PetProfile = (props) => {
         </View>
       </View>
       <Pressable style={styles.section} onPress={() => setShowWeights(true)}>
-        <WeightTracker pet={petInfo.pet_name} petID={petInfo.id} show={showWeights} close={closeSection}/>
+        <WeightTracker pet={petInfo} petID={petInfo.id} show={showWeights} close={closeSection}/>
       </Pressable>
       <View style={styles.section}>
         <Text>Health</Text>
