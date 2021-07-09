@@ -17,9 +17,10 @@ export default function WeighIn (props) {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    width: 300,
+    width: 260,
     justifyContent: 'space-between',
     padding: '2%',
-    borderWidth: 3
+    backgroundColor: '#F7EDFE',
+    borderRadius: 5
   }
 })

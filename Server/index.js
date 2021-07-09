@@ -28,3 +28,7 @@ app.patch('/updateGoals/:petID', (req, res) => {
   console.log(req.body);
   controller.updateWeightGoals(req.params.petID, req.body, res);
 })
+
+app.post('/addWeight/:petID', (req, res) => {
+  controller.addWeight(req.params.petID, req.body.newWeight, res);
+})

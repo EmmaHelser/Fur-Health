@@ -58,5 +58,14 @@ module.exports = {
         callback(null, success);
       }
     })
+  },
+  addWeighIn (petID, weight, callback) {
+    db.con.query(`INSERT INTO pet_weight_tracking (pet_id, pet_weight) VALUES ('${petID}', '${weight}');`, (err, success) => {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, success);
+      }
+    })
   }
 }

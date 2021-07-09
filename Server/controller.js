@@ -46,5 +46,14 @@ module.exports = {
         res.status(200).send('Goals updated!');
       }
     })
+  },
+  addWeight: (petID, weight, res) => {
+    queries.addWeighIn(petID, weight, (err, success) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.status(201).send('Weight added!');
+      }
+    })
   }
-}
+ }
