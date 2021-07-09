@@ -1,44 +1,56 @@
 import React, {useState, useEffect} from 'react';
-import {ScrollView, View, Text, Image, StyleSheet} from 'react-native';
+import {ScrollView, View, Text, Image, StyleSheet, Pressable} from 'react-native';
 import axios from 'axios';
+import AddPet from './addPet.js';
 import NameTag from './nameTag.js';
 import PetProfile from './petProfile.js';
 
 const Home = (props) => {
   const [pet, setPet] = useState('');
   const [petList, setPetList] = useState([]);
+  const [addPet, setAddPet] = useState(false);
 
   useEffect(() => {
-    function getPets() {
-      axios.get(`http://127.0.0.1:3000/getPets/${props.user}`)
-      .then(response => {
-        setPetList(response.data);
-      })
-      .catch(err => {
-        console.log(err);
-      })
-    }
-
     getPets()
   }, [])
+
+  useEffect(() => {
+    getPets()
+  }, [addPet])
+
+  const getPets = () => {
+    axios.get(`http://127.0.0.1:3000/getPets/${props.user}`)
+    .then(response => {
+      setPetList(response.data);
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }
 
   const viewProfile = (desiredPet) => {
     setPet(desiredPet);
   }
 
+  const profileCreated = () => {
+    setAddPet(false);
+  }
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      {pet === ''
-        ? <View>
-            <Text style={styles.title}>Your Pets</Text>
-            <View style={styles.petList}>
-              {petList.map(pet => <NameTag key={pet.pet_name} viewProfile={viewProfile} pet={pet}/> )}
-            </View>
-            <View style={styles.petList}>
-              <Text style={styles.addPet}>Add New Pet!</Text>
-            </View>
-          </View>
-        : <PetProfile pet={pet} user={props.user}/>
+      {addPet === true
+        ? <AddPet user={props.user} addProfile={props.addProfile} profileCreated={profileCreated}/>
+        : (pet === ''
+            ? <View>
+                <Text style={styles.title}>Your Pets</Text>
+                <View style={styles.petList}>
+                  {petList.map(pet => <NameTag key={pet.pet_name} viewProfile={viewProfile} pet={pet}/> )}
+                </View>
+                <Pressable style={styles.petList} onPress={() => setAddPet(true)}>
+                  <Text style={styles.addPet}>Add New Pet!</Text>
+                </Pressable>
+              </View>
+            : <PetProfile pet={pet} user={props.user}/>)
       }
     </ScrollView>
   );

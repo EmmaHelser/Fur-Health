@@ -19,3 +19,7 @@ app.get('/getPets/:ownerName', (req, res) => {
 app.get('/getPetInfo/:user&:pet', (req, res) => {
   controller.gatherAllPetInfo(req.params.user, req.params.pet, res);
 })
+
+app.get('/getWeights/:petID', (req, res) => {
+  controller.getWeighIns(req.params.petID, res);
+})

@@ -33,8 +33,6 @@ export default function App() {
       .catch(err => {
         console.log(err);
       })
-
-      setNewUser(false);
   }
 
   return (
@@ -42,7 +40,7 @@ export default function App() {
       {loggedIn === false
       ? <Login loggingIn={didLogin} />
       : (newUser === false
-        ? <Home user={user}/>
+        ? <Home user={user} addProfile={addProfile}/>
         : <AddPet user={user} profileCreated={profileCreated} addProfile={addProfile}/>)}
     </View>
   );

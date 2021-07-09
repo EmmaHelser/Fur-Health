@@ -28,5 +28,14 @@ module.exports = {
         res.status(202).send(data);
       }
     })
+  },
+  getWeighIns: (petID, res) => {
+    queries.getWeights(petID, (err, data) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.status(202).send(data);
+      }
+    })
   }
 }

@@ -40,5 +40,14 @@ module.exports = {
         callback(null, data);
       }
     })
+  },
+  getWeights (petID, callback) {
+    db.con.query(`SELECT weigh_date, pet_weight FROM pet_weight_tracking WHERE pet_id='${petID}'`, (err, data) => {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, data);
+      }
+    })
   }
 }
