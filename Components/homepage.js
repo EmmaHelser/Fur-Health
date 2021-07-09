@@ -12,6 +12,7 @@ const Home = (props) => {
     function getPets() {
       axios.get(`http://10.0.0.240:3000/getPets/${props.user}`)
       .then(response => {
+        console.log(response.data);
         setPetList(response.data);
       })
       .catch(err => {
@@ -22,13 +23,17 @@ const Home = (props) => {
     getPets()
   }, [])
 
+  const viewProfile = (desiredPet) => {
+    setPet(desiredPet);
+  }
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
       {pet === ''
         ? <View>
             <Text style={styles.title}>Your Pets</Text>
             <View style={styles.petList}>
-              {petList.map(pet => <NameTag key={pet.pet_name} pet={pet}/> )}
+              {petList.map(pet => <NameTag key={pet.pet_name} viewProfile={viewProfile} pet={pet}/> )}
             </View>
             <View style={styles.petList}>
               <Text style={styles.addPet}>Add New Pet!</Text>

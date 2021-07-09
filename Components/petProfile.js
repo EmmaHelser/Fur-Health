@@ -20,6 +20,7 @@ const PetProfile = (props) => {
   return (
     <View>
       <Text>{props.pet.pet_name}</Text>
+      <WeightTracker pet={props.pet.pet_name}/>
 
     </View>
   );

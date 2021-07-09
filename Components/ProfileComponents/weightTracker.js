@@ -23,9 +23,9 @@ export default function WeightTracker (props) {
   return (
     <View>
       <View>
-        <Text>Current Weight: </Text>
+        <Text>Current Weight</Text>
         <Text>Weight Goals</Text>
-        <Text>{weightGoal}</Text>
+        <Text>Goal Weight</Text>
       </View>
       <Modal
         animationType="slide"
