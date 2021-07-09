@@ -9,6 +9,7 @@ const AddPet = (props) => {
   const [petFamily, setPetFamily] = useState('');
   const [petWeight, setPetWeight] = useState('');
   const [petBreed, setPetBreed] = useState('');
+  const [gender, setGender] = useState('');
   const [enableButton, setEnableButton] = useState(false)
 
   const petProfile = {
@@ -16,6 +17,7 @@ const AddPet = (props) => {
     ownerName: props.user,
     birthday: birthday,
     age: petAge,
+    gender: gender,
     petWeight: petWeight,
     family: petFamily,
     petType: petType,
@@ -64,6 +66,16 @@ const AddPet = (props) => {
           defaultValue={birthday}
         />
       </View>
+      <View>
+        <Picker
+          itemStyle={styles.petSelector}
+          selectedValue={gender}
+          onValueChange={selectedGender => setGender(selectedGender)}>
+            <Picker.Item label='Select Gender' value='Select Gender'/>
+            <Picker.Item label='Male' value='Male'/>
+            <Picker.Item label='Female' value='Female'/>
+          </Picker>
+      </View>
       <View style={styles.petInfoSection}>
         <Text style={styles.inputLabel}>Family</Text>
         <TextInput
@@ -79,6 +91,7 @@ const AddPet = (props) => {
           itemStyle={styles.petSelector}
           selectedValue={petType}
           onValueChange={selectedPet => setPetType(selectedPet)}>
+            <Picker.Item label='Select Pet' value='Select Pet'/>
             <Picker.Item label='Cat' value='Cat'/>
             <Picker.Item label='Dog' value='Dog'/>
             <Picker.Item label='Rabbit' value='Rabbit'/>

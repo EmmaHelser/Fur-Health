@@ -1,8 +1,8 @@
 const db = require('./sqlConnection.js');
 
 module.exports = {
-  createProfile (petName, ownerName, birthday, age, petWeight, family, petType, breed, callback) {
-    db.con.query(`INSERT INTO pet_profiles VALUES (null, '${petName}', '${ownerName}', '${birthday}', '${age}', '${petWeight}', '${family}', '${petType}', '${breed}')`, (err, data) => {
+  createProfile (petName, ownerName, birthday, age, petGender,petWeight, family, petType, breed, callback) {
+    db.con.query(`INSERT INTO pet_profiles VALUES (null, '${petName}', '${ownerName}', '${birthday}', '${age}', '${petGender}', '${petWeight}', null, null, '${family}', '${petType}', '${breed}')`, (err, data) => {
       if (err) {
         console.log(err);
       } else {

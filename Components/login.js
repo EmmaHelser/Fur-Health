@@ -4,26 +4,26 @@ import {View, Text, TextInput, Button, Pressable, StyleSheet} from 'react-native
 const Login = (props) => {
   const [user, setUser] = useState('');
   const [newUser, setNewUser] = useState(false);
+  const [background, setBackground] = useState('#FDFBFE');
 
   return (
     <View style={styles.container}>
-      <Text>User</Text>
+      <Text style={styles.title}>User Login</Text>
+      <Text style={styles.fieldName}>User</Text>
       <TextInput
+        style={styles.field}
         placeholder='Your Name'
         onChangeText={name => setUser(name)}
         defaultValue={user}
       />
-      <Text>* If new user, fill in name, click new user, and then login</Text>
+      <Text style={styles.smallText}>* If new user, fill in name, click new user, and then login</Text>
       <Pressable
-        style={({pressed}) => [
-          {
-            backgroundColor: pressed
-              ? 'rgb(210, 230, 255)'
-              : 'white'
-          }
-        ]}
-        onPressIn={press => setNewUser(true)}>
-        <Text>New User</Text>
+        style={{backgroundColor: background, height: '10%', width: '50%', borderRadius: 5}}
+        onPressIn={press =>
+        {setNewUser(true)
+        setBackground('#B2DFFF')}
+        }>
+        <Text style={styles.newText}>New User</Text>
       </Pressable>
       <Button color='black' title='Login' onPress={() => props.loggingIn(user, newUser)} />
     </View>
@@ -32,17 +32,40 @@ const Login = (props) => {
 }
 
 const styles = StyleSheet.create({
-  newButton: {
-    borderColor: 'black',
-    borderWidth: 1,
-    padding: 10
-  },
   container: {
     backgroundColor: '#D0B6E1',
     height: 250,
     width: 200,
+    borderRadius: 5,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  newText: {
+    textAlign: 'center',
+    padding: 3
+  },
+  smallText: {
+    fontSize: 10,
+    textAlign: 'center',
+    margin: 5,
+    marginBottom: 7
+  },
+  title: {
+    fontSize: 25,
+    margin: 5,
+    textDecorationLine: 'underline',
+    textDecorationColor: '#8659A3'
+  },
+  fieldName: {
+    fontSize: 20,
+    margin: 5
+  },
+  field: {
+    height: '10%',
+    width: '50%',
+    borderRadius: 5,
+    backgroundColor: '#FDFBFE',
+    textAlign: 'center'
   }
 })
 
