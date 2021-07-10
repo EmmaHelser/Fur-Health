@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, Image, StyleSheet, Pressable} from 'react-native';
+import {View, Text, Image, StyleSheet, Pressable, Button} from 'react-native';
 import axios from 'axios';
 import WeightTracker from './ProfileComponents/weightTracker.js';
 
@@ -32,6 +32,9 @@ const PetProfile = (props) => {
 
   return (
     <View style={styles.container}>
+      <View style={styles.backButton}>
+        <Button title='Back' onPress={() => props.close()}/>
+      </View>
       <Text style={styles.title}>{petInfo.pet_name}</Text>
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>About</Text>
@@ -94,6 +97,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 5
+  },
+  backButton: {
+    alignSelf: 'flex-start'
   }
 })
 

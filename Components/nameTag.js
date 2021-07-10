@@ -7,7 +7,7 @@ export default function NameTage(props) {
       <Text style={styles.name}>{props.pet.pet_name}</Text>
       <View style={styles.detailContainer}>
         <Text style={styles.detail}>Age: {props.pet.age}</Text>
-        <Text>Weight: {props.pet.pet_weight}</Text>
+        <Text>Gender: {props.pet.pet_gender}</Text>
       </View>
     </Pressable>
   )
@@ -16,7 +16,12 @@ export default function NameTage(props) {
 const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
-    alignItems: 'flex-start'
+    alignItems: 'flex-start',
+    margin: 10,
+    width: 250,
+    borderRadius: 5,
+    backgroundColor: '#F7EDFE',
+    padding: 5,
   },
   name: {
     fontSize: 20,

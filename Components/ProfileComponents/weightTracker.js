@@ -19,6 +19,10 @@ export default function WeightTracker (props) {
     setWeightStatus(props.pet.weight_status);
   }, [props.show])
 
+  useEffect(() => {
+    getPastWeights()
+  }, [newWeight])
+
   const getPastWeights = () => {
     axios.get(`http://127.0.0.1:3000/getWeights/${props.petID}`)
     .then(response => {
@@ -40,6 +44,7 @@ export default function WeightTracker (props) {
     axios(option)
       .then(response => {
         console.log(response.data);
+        setNewWeight('');
       })
       .catch(err => {
         console.log(err);
@@ -56,9 +61,11 @@ export default function WeightTracker (props) {
   return (
     <View>
       <View>
-        <Text>Current Weight</Text>
-        <Text>Weight Goals</Text>
-        <Text>Goal Weight</Text>
+        <Text style={styles.sectionTitle}>Weight Tracker</Text>
+        <View style={styles.infoSection}>
+          <Text>Current Weight: {props.pet.pet_weight}</Text>
+          <Text>Goal: {goalWeight}</Text>
+        </View>
       </View>
       <Modal
         animationType="slide"
@@ -78,7 +85,7 @@ export default function WeightTracker (props) {
             <View style={styles.goals}>
               <Text style={styles.goalText}>Weight Goal: {weightGoal}</Text>
               <Text style={styles.goalText}>Goal Weight: {goalWeight}</Text>
-              <Text style={styles.goalText}>Weight Status: {weightStatus}</Text>
+              <Text style={styles.goalText}>Status: {weightStatus}</Text>
               <AddGoals close={closeGoals} show={showGoals} petID={props.petID}/>
               <Button title='Add Goals' onPress={() => setShowGoals(true)}/>
             </View>
@@ -131,6 +138,15 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
     textDecorationColor: '#8659A3'
   },
+  sectionTitle: {
+    fontSize: 20,
+    alignSelf: 'center'
+  },
+  infoSection: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 5
+  },
   add: {
     backgroundColor: '#F7EDFE',
     borderRadius: 5,
@@ -160,6 +176,7 @@ const styles = StyleSheet.create({
     width: '30%'
   },
   goalText: {
-    fontSize: 12
+    fontSize: 12,
+    marginTop: 7
   }
 })

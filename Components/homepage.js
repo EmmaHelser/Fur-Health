@@ -32,6 +32,10 @@ const Home = (props) => {
     setPet(desiredPet);
   }
 
+  const closeProfile = () => {
+    setPet('');
+  }
+
   const profileCreated = () => {
     setAddPet(false);
   }
@@ -46,11 +50,11 @@ const Home = (props) => {
                 <View style={styles.petList}>
                   {petList.map(pet => <NameTag key={pet.pet_name} viewProfile={viewProfile} pet={pet}/> )}
                 </View>
-                <Pressable style={styles.petList} onPress={() => setAddPet(true)}>
+                <Pressable style={styles.addButton} onPress={() => setAddPet(true)}>
                   <Text style={styles.addPet}>Add New Pet!</Text>
                 </Pressable>
               </View>
-            : <PetProfile pet={pet} user={props.user}/>)
+            : <PetProfile pet={pet} user={props.user} close={closeProfile}/>)
       }
     </ScrollView>
   );
@@ -69,10 +73,6 @@ const styles = StyleSheet.create({
     borderRadius: 5
   },
   petList: {
-    width: 250,
-    borderRadius: 5,
-    backgroundColor: '#F7EDFE',
-    padding: 5,
     justifyContent: 'center',
     marginTop: 25,
     marginLeft: 50,
@@ -90,7 +90,17 @@ const styles = StyleSheet.create({
   addPet: {
     fontSize: 20,
     fontWeight: 'bold',
-    textAlign: 'center'
+    textAlign: 'center',
+    marginHorizontal: 5,
+  },
+  addButton: {
+    justifyContent: 'center',
+    marginTop: 10,
+    marginHorizontal: '20%',
+    width: 250,
+    borderRadius: 5,
+    backgroundColor: '#F7EDFE',
+    padding: 11
   }
 })
 

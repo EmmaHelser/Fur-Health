@@ -24,7 +24,7 @@ module.exports = {
     })
   },
   getPets (ownerName, callback) {
-    db.con.query(`SELECT pet_name, age, pet_weight FROM pet_profiles WHERE owner_name='${ownerName}'`, (err, data) => {
+    db.con.query(`SELECT pet_name, age, pet_gender, petType FROM pet_profiles WHERE owner_name='${ownerName}'`, (err, data) => {
       if (err) {
         callback(err);
       } else {
@@ -42,7 +42,7 @@ module.exports = {
     })
   },
   getWeights (petID, callback) {
-    db.con.query(`SELECT weigh_date, pet_weight FROM pet_weight_tracking WHERE pet_id='${petID}'`, (err, data) => {
+    db.con.query(`SELECT weigh_date, pet_weight FROM pet_weight_tracking WHERE pet_id='${petID}' ORDER BY id DESC;`, (err, data) => {
       if (err) {
         callback(err);
       } else {

@@ -8,7 +8,7 @@ const Login = (props) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>User Login</Text>
+      <Text style={styles.title}>Fur Health</Text>
       <Text style={styles.fieldName}>User</Text>
       <TextInput
         style={styles.field}
