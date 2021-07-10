@@ -54,7 +54,8 @@ const styles = StyleSheet.create({
     fontSize: 25,
     margin: 5,
     textDecorationLine: 'underline',
-    textDecorationColor: '#8659A3'
+    textDecorationColor: '#8659A3',
+    fontFamily: 'Marker Felt'
   },
   fieldName: {
     fontSize: 20,
