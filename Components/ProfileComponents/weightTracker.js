@@ -23,8 +23,12 @@ export default function WeightTracker (props) {
     getPastWeights()
   }, [newWeight])
 
+  useEffect(() => {
+    setGoalWeight(props.pet.goal_weight);
+  }, [])
+
   const getPastWeights = () => {
-    axios.get(`http://127.0.0.1:3000/getWeights/${props.petID}`)
+    axios.get(`http://127.0.0.1:3001/getWeights/${props.petID}`)
     .then(response => {
       setPastWeights(response.data)
     })
@@ -36,7 +40,7 @@ export default function WeightTracker (props) {
   const addNewWeight = (weight) => {
     const option = {
       'method': 'post',
-      'url': `http://127.0.0.1:3000/addWeight/${props.petID}`,
+      'url': `http://127.0.0.1:3001/addWeight/${props.petID}`,
       'data': {
         newWeight: weight
       }
@@ -56,6 +60,10 @@ export default function WeightTracker (props) {
     setWeightGoal(newGoals.weightGoal);
     setGoalWeight(newGoals.goalWeight);
     setWeightStatus(newGoals.status);
+  }
+
+  const closeGoalsNoChange = () => {
+    setShowGoals(false);
   }
 
   return (
@@ -83,11 +91,16 @@ export default function WeightTracker (props) {
           <Text style={styles.title}>Weight Tracker</Text>
           <View style={styles.overview}>
             <View style={styles.goals}>
-              <Text style={styles.goalText}>Weight Goal: {weightGoal}</Text>
-              <Text style={styles.goalText}>Goal Weight: {goalWeight}</Text>
-              <Text style={styles.goalText}>Status: {weightStatus}</Text>
-              <AddGoals close={closeGoals} show={showGoals} petID={props.petID}/>
-              <Button title='Add Goals' onPress={() => setShowGoals(true)}/>
+              <Text style={styles.goalText}>Weight Goal: </Text>
+              <Text style={styles.currentGoal}>{weightGoal}</Text>
+              <Text style={styles.goalText}>Goal Weight: </Text>
+              <Text style={styles.currentGoal}>{goalWeight}</Text>
+              <Text style={styles.goalText}>Status: </Text>
+              <Text style={styles.currentGoal}>{weightStatus}</Text>
+              <AddGoals close={closeGoals} show={showGoals} petID={props.petID} back={closeGoalsNoChange}/>
+              <TouchableOpacity onPress={() => setShowGoals(true)}>
+                <Text style={styles.addGoals}>Add Goals</Text>
+              </TouchableOpacity>
             </View>
             <View>
               <Text>Graph</Text>
@@ -110,7 +123,6 @@ export default function WeightTracker (props) {
       </Modal>
     </View>
   )
-
 }
 
 const styles = StyleSheet.create({
@@ -120,10 +132,12 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: '15%',
     marginHorizontal: 50,
-    backgroundColor: '#D0B6E1',
+    backgroundColor: '#fff',
     height: '85%',
     width: 300,
-    borderRadius: 5
+    borderRadius: 5,
+    borderColor: '#D0B6E1',
+    borderWidth: 2
   },
   weightsList: {
     justifyContent: 'center',
@@ -140,7 +154,8 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 20,
-    alignSelf: 'center'
+    alignSelf: 'center',
+    marginBottom: 5
   },
   infoSection: {
     flexDirection: 'row',
@@ -150,6 +165,10 @@ const styles = StyleSheet.create({
   add: {
     backgroundColor: '#F7EDFE',
     borderRadius: 5,
+    borderBottomWidth: 2,
+    borderBottomColor: 'grey',
+    borderRightWidth: 2,
+    borderRightColor: 'grey',
     width: 260,
     height: 37,
     flexDirection: 'row',
@@ -166,17 +185,33 @@ const styles = StyleSheet.create({
     padding: '3%',
     justifyContent: 'space-between',
     backgroundColor: '#F7EDFE',
-    borderRadius: 5
+    borderRadius: 5,
+    borderBottomWidth: 2,
+    borderBottomColor: 'grey',
+    borderRightWidth: 2,
+    borderRightColor: 'grey'
   },
   button: {
     alignSelf: 'flex-start',
     marginLeft: 10
   },
   goals: {
-    width: '30%'
+    width: '35%'
   },
   goalText: {
     fontSize: 12,
-    marginTop: 7
+    marginTop: 5,
+    fontWeight: 'bold'
+  },
+  addGoals: {
+    marginTop: 15,
+    borderBottomWidth: 2,
+    borderRightWidth: 2,
+    borderBottomColor: 'grey',
+    borderRightColor: 'grey',
+    color: '#067ee3'
+  },
+  currentGoal: {
+    fontSize: 12
   }
 })

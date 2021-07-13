@@ -67,5 +67,20 @@ module.exports = {
         callback(null, success);
       }
     })
+  },
+  getVetVisits (petID, callback) {
+    db.con.query(`SELECT visit_date, visit_reason FROM vet_visits WHERE pet_id='${petID}' ORDER BY id DESC;`, (err, visits) => {
+      if (err) {
+        callback(err);
+      } else {
+        db.con.query(`SELECT visit_date, visit_reason FROM vet_visits WHERE pet_id='${petID}' ORDER BY id DESC LIMIT 1;`, (err, data) => {
+          if (err) {
+            console.log(err);
+          } else {
+            callback(null, [data, visits]);
+          }
+        })
+      }
+    })
   }
 }

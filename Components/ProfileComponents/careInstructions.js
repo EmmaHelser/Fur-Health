@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, Button, StyleSheet, Modal} from 'react-native';
+import {View, Text, StyleSheet, Modal, Button} from 'react-native';
 
-const Exercise = (props) => {
+const CareInstructions = (props) => {
   return (
     <View>
       <View>
-        <Text style={styles.sectionTitle}>Exercise</Text>
+        <Text style={styles.sectionTitle}>Care Instructions</Text>
       </View>
       <Modal
         animationType="slide"
@@ -20,7 +20,8 @@ const Exercise = (props) => {
           <View style={styles.button}>
             <Button title='Back' onPress={() => props.close()}/>
           </View>
-          <Text>Exercise</Text>
+          <Text>Diet</Text>
+          <Text>Medications</Text>
         </View>
       </Modal>
     </View>
@@ -49,4 +50,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default Exercise;
+export default CareInstructions;

@@ -43,6 +43,7 @@ CREATE TABLE vet_visits (
   id INT AUTO_INCREMENT,
   pet_id INT,
   visit_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  visit_reason VARCHAR(30) NOT NULL,
   visit_notes VARCHAR(1000) NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (pet_id) REFERENCES pet_profiles(id)

@@ -3,12 +3,12 @@ import {View, Text, StyleSheet} from 'react-native';
 import formatDate from '../helpers.js';
 
 export default function WeighIn (props) {
-  const date = formatDate(props.weight.weigh_date);
+  const date = formatDate(props.date);
 
   return (
     <View style={styles.container}>
-      <Text style={styles.weight}>{props.weight.pet_weight}</Text>
-      <Text style={styles.date}>{date}</Text>
+      <Text>{props.reason}</Text>
+      <Text>{date}</Text>
     </View>
   )
 }

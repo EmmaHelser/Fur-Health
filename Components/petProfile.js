@@ -2,6 +2,9 @@ import React, {useState, useEffect} from 'react';
 import {View, Text, Image, StyleSheet, Pressable, Button} from 'react-native';
 import axios from 'axios';
 import WeightTracker from './ProfileComponents/weightTracker.js';
+import CareInstructions from './ProfileComponents/careInstructions.js';
+import Exercise from './ProfileComponents/exerciseLog.js';
+import VetVisits from './ProfileComponents/vetVisits.js';
 
 const PetProfile = (props) => {
   const [petInfo, setPetInfo] = useState({});
@@ -12,7 +15,7 @@ const PetProfile = (props) => {
 
   useEffect(() => {
     function completePetInfo() {
-      axios.get(`http://127.0.0.1:3000/getPetInfo/${props.user}&${props.pet.pet_name}`)
+      axios.get(`http://127.0.0.1:3001/getPetInfo/${props.user}&${props.pet.pet_name}`)
         .then(response => {
           console.log(response.data);
           setPetInfo(response.data[0]);
@@ -27,6 +30,8 @@ const PetProfile = (props) => {
 
   const closeSection = () => {
     setShowWeights(false);
+    setShowHealth(false);
+    setShowExercise(false);
     setShowVet(false);
   }
 
@@ -52,15 +57,15 @@ const PetProfile = (props) => {
       <Pressable style={styles.section} onPress={() => setShowWeights(true)}>
         <WeightTracker pet={petInfo} petID={petInfo.id} show={showWeights} close={closeSection}/>
       </Pressable>
-      <View style={styles.section}>
-        <Text>Health</Text>
-      </View>
-      <View style={styles.section}>
-        <Text>Exercise</Text>
-      </View>
-      <View style={styles.section}>
-        <Text>Vet Visits</Text>
-      </View>
+      <Pressable style={styles.section} onPress={() => setShowHealth(true)}>
+        <CareInstructions show={showHealth} petID={petInfo.id} close={closeSection}/>
+      </Pressable>
+      <Pressable style={styles.section} onPress={() => setShowExercise(true)}>
+        <Exercise show={showExercise} petID={petInfo.id} close={closeSection}/>
+      </Pressable>
+      <Pressable style={styles.section} onPress={() => setShowVet(true)}>
+        <VetVisits show={showVet} petID={petInfo.id} close={closeSection}/>
+      </Pressable>
     </View>
   );
 }
@@ -74,8 +79,8 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 40,
     fontWeight: 'bold',
-    textDecorationLine: 'underline',
-    textDecorationColor: '#8659A3',
+    // textDecorationLine: 'underline',
+    // textDecorationColor: '#8659A3',
     marginBottom: 10
   },
   section: {

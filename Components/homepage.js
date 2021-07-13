@@ -12,14 +12,14 @@ const Home = (props) => {
 
   useEffect(() => {
     getPets()
-  }, [])
+  })
 
   useEffect(() => {
     getPets()
   }, [addPet])
 
   const getPets = () => {
-    axios.get(`http://127.0.0.1:3000/getPets/${props.user}`)
+    axios.get(`http://127.0.0.1:3001/getPets/${props.user}`)
     .then(response => {
       setPetList(response.data);
     })
@@ -62,7 +62,7 @@ const Home = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#D0B6E1',
+    backgroundColor: '#fff',
     height: '80%',
     width: 300,
     justifyContent: 'space-between',
@@ -70,7 +70,9 @@ const styles = StyleSheet.create({
     paddingTop: 25,
     marginTop: '25%',
     paddingBottom: 50,
-    borderRadius: 5
+    borderRadius: 5,
+    borderColor: '#D0B6E1',
+    borderWidth: 2
   },
   petList: {
     justifyContent: 'center',
@@ -100,7 +102,11 @@ const styles = StyleSheet.create({
     width: 250,
     borderRadius: 5,
     backgroundColor: '#F7EDFE',
-    padding: 11
+     padding: 11,
+    borderBottomWidth: 2,
+    borderBottomColor: 'grey',
+    borderRightWidth: 2,
+    borderRightColor: 'grey'
   }
 })
 

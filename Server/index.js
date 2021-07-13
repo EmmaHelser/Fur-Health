@@ -1,11 +1,11 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = 3001;
 const controller = require('./controller.js')
 
 app.use(express.json());
 app.listen(port, (req, res) => {
-  console.log('Listening on 3000!');
+  console.log('Listening on 3001!');
 })
 
 app.post('/addPet', (req, res) => {
@@ -25,10 +25,13 @@ app.get('/getWeights/:petID', (req, res) => {
 })
 
 app.patch('/updateGoals/:petID', (req, res) => {
-  console.log(req.body);
   controller.updateWeightGoals(req.params.petID, req.body, res);
 })
 
 app.post('/addWeight/:petID', (req, res) => {
   controller.addWeight(req.params.petID, req.body.newWeight, res);
+})
+
+app.get('/getVetVisits/:petID', (req, res) => {
+  controller.getVetVisits(req.params.petID, res);
 })

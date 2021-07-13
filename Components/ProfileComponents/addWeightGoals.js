@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, Modal, Picker, StyleSheet, Button, TextInput} from 'react-native';
+import {View, Text, Modal, Picker, StyleSheet, Button, TextInput, button} from 'react-native';
 import axios from 'axios';
 
 export default function AddGoals (props) {
@@ -10,7 +10,7 @@ export default function AddGoals (props) {
   const updateGoals = (newGoals) => {
     const option = {
       'method': 'patch',
-      "url": `http://127.0.0.1:3000/updateGoals/${props.petID}`,
+      "url": `http://127.0.0.1:3001/updateGoals/${props.petID}`,
       "data": newGoals
     }
     axios(option)
@@ -45,6 +45,9 @@ export default function AddGoals (props) {
       }}
     >
       <View style={styles.container}>
+        <View style={styles.button}>
+            <Button title='Back' onPress={() => props.back()}/>
+        </View>
         <Text style={styles.title}>Goals</Text>
         <Text style={styles.inputLabel}>Weight Goal</Text>
         <Picker
@@ -77,7 +80,9 @@ export default function AddGoals (props) {
           <Picker.Item label='Needs Chonkin' value='Needs Chonkin'/>
           <Picker.Item label='Really Needs Chonkin' value='Really Needs Chonkin'/>
         </Picker>
-        <Button title='Add Goals' color='#F7EDFE' onPress={() => close()}/>
+        <View style={styles.addButton}>
+          <Button title='Add Goals' onPress={() => close()}/>
+        </View>
       </View>
     </Modal>
   )
@@ -86,37 +91,45 @@ export default function AddGoals (props) {
 const styles = StyleSheet.create({
   container: {
     alignSelf: 'center',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     justifyContent: 'flex-start',
     marginTop: '50%',
-    backgroundColor: '#8659A3',
-    height: '40%',
-    width: '80%',
-    borderWidth: 2,
-    borderColor: '#F7EDFE',
+    backgroundColor: '#fff',
+    height: '45%',
+    width: '90%',
     padding: '3%',
-    borderRadius: 5
+    borderRadius: 5,
+    borderColor: '#D0B6E1',
+    borderWidth: 2
   },
   title: {
     fontSize: 30,
     textDecorationLine: 'underline',
-    textDecorationColor: '#F7EDFE'
+    textDecorationColor: '#8659A3',
+    alignSelf: 'center'
   },
   petSelector: {
     backgroundColor: '#F7EDFE',
-    width: 210,
+    width: 240,
     height: 40,
     borderRadius: 5,
-    margin: 10
+    marginVertical: 5
   },
   inputLabel: {
-    fontSize: 20
+    fontSize: 20,
+    marginTop: 10
   },
   inputArea: {
     borderRadius: 5,
-    width: 210,
+    width: 240,
     height: 40,
     textAlign: 'center',
     backgroundColor: '#F7EDFE'
+  },
+  button: {
+    alignSelf: 'flex-start'
+  },
+  addButton: {
+    alignSelf: 'center'
   }
 })

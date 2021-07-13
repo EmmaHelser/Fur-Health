@@ -55,5 +55,14 @@ module.exports = {
         res.status(201).send('Weight added!');
       }
     })
+  },
+  getVetVisits: (petID, res) => {
+    queries.getVetVisits(petID, (err, data) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.status(200).send(data);
+      }
+    })
   }
  }
