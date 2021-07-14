@@ -64,7 +64,7 @@ const PetProfile = (props) => {
         <Exercise show={showExercise} petID={petInfo.id} close={closeSection}/>
       </Pressable>
       <Pressable style={styles.section} onPress={() => setShowVet(true)}>
-        <VetVisits show={showVet} petID={petInfo.id} close={closeSection}/>
+        <VetVisits show={showVet} petID={petInfo.id} vet={petInfo.vet} close={closeSection}/>
       </Pressable>
     </View>
   );

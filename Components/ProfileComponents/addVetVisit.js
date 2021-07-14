@@ -1,7 +1,36 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, TextInput, Button, StyleSheet, Modal} from 'react-native';
+import axios from 'axios';
 
 export default function AddVisit (props) {
+  const [visitReason, setVisitReason] = useState('');
+  const [doctor, setDoctor] = useState('');
+  const [visitNotes, setVisitNotes] = useState('');
+
+  const visitSummary = {
+    reason: visitReason,
+    doctor: doctor,
+    notes: visitNotes
+  }
+
+  async function addVisit(newVisit) {
+    let visit = await newVisit;
+
+    const option = {
+      method: 'post',
+      url: (`http://127.0.0.1:3001/addVetVisits/${props.petID}`),
+      data: visit
+    }
+    axios(option)
+      .then(response => {
+        props.addVisit();
+        console.log('Visit added!')
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
+
   return (
     <Modal
       animationType="slide"
@@ -19,18 +48,18 @@ export default function AddVisit (props) {
         <Text style={styles.title}>Summary of Visit</Text>
         <View>
           <Text style={styles.inputLabel}>Reason for Visit:</Text>
-          <TextInput style={styles.inputArea} placeholder='Shots'></TextInput>
+          <TextInput style={styles.inputArea} placeholder='Shots' value={visitReason} onChangeText={reason => setVisitReason(reason)}></TextInput>
         </View>
         <View>
           <Text style={styles.inputLabel}>Doctor:</Text>
-          <TextInput style={styles.inputArea} placeholder='Dr. Hawk'></TextInput>
+          <TextInput style={styles.inputArea} placeholder='Dr. Hawk' value={doctor} onChangeText={visitDoctor => setDoctor(visitDoctor)}></TextInput>
         </View>
         <View>
           <Text style={styles.inputLabel}>Visit Details:</Text>
-          <TextInput style={styles.visitDetails} placeholder='Recieved yearly shots and a physical.' multiline={true}></TextInput>
+          <TextInput style={styles.visitDetails} placeholder='Recieved yearly shots and a physical.' multiline={true} value={visitNotes} onChangeText={notes => setVisitNotes(notes)}></TextInput>
         </View>
         <View>
-          <Button title='Add Visit'/>
+          <Button title='Add Visit' onPress={() => addVisit(visitSummary)}/>
         </View>
       </View>
     </Modal>

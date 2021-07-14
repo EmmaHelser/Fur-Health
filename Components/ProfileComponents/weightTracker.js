@@ -102,8 +102,8 @@ export default function WeightTracker (props) {
                 <Text style={styles.addGoals}>Add Goals</Text>
               </TouchableOpacity>
             </View>
-            <View>
-              <Text>Graph</Text>
+            <View style={styles.chart}>
+              <Text>Chart</Text>
             </View>
           </View>
           <View style={styles.add}>
@@ -213,5 +213,15 @@ const styles = StyleSheet.create({
   },
   currentGoal: {
     fontSize: 12
+  },
+  chart: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    alignItems: 'center',
+    borderWidth: 2,
+    width: '65%',
+    marginLeft: '1%',
+    height: '95%'
   }
 })

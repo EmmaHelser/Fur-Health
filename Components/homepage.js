@@ -12,7 +12,7 @@ const Home = (props) => {
 
   useEffect(() => {
     getPets()
-  })
+  }, [])
 
   useEffect(() => {
     getPets()

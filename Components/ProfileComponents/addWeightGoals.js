@@ -94,13 +94,13 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
     marginTop: '50%',
-    backgroundColor: '#fff',
+    backgroundColor: '#D0B6E1',
     height: '45%',
-    width: '90%',
+    width: '73%',
+    // borderWidth: 2,
+    // borderColor: '#F7EDFE',
     padding: '3%',
-    borderRadius: 5,
-    borderColor: '#D0B6E1',
-    borderWidth: 2
+    borderRadius: 5
   },
   title: {
     fontSize: 30,
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
   },
   petSelector: {
     backgroundColor: '#F7EDFE',
-    width: 240,
+    width: 210,
     height: 40,
     borderRadius: 5,
     marginVertical: 5
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
   },
   inputArea: {
     borderRadius: 5,
-    width: 240,
+    width: 210,
     height: 40,
     textAlign: 'center',
     backgroundColor: '#F7EDFE'

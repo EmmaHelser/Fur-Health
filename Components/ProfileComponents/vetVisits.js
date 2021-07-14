@@ -9,17 +9,19 @@ const VetVisits = (props) => {
   const [lastVisit, setLastVisit] = useState('');
   const [vetVisits, setVetVisits] = useState([]);
   const [addVisit, setAddVisit] = useState(false);
-  const lastDate = (lastVisit.length !== 0 ? formatDate(lastVisit.visit_date) : '');
+  const [visitAdded, setVisitAdded] = useState(false);
+  let lastDate = (lastVisit.visit_date !== undefined ? formatDate(lastVisit.visit_date) : '');
 
   useEffect(() => {
     getVisits();
-  }, [props.show])
+    setVisitAdded(false);
+  }, [props.show, visitAdded])
+
 
   const getVisits = () => {
     axios.get(`http://127.0.0.1:3001/getVetVisits/${props.petID}`)
       .then(response => {
-        console.log('visits', response.data[0]);
-        setLastVisit(response.data[0])
+        setLastVisit(response.data[0][0]);
         setVetVisits(response.data[1]);
       })
       .catch(err => {
@@ -28,6 +30,11 @@ const VetVisits = (props) => {
   }
 
   const closeAddModal = () => {
+    setAddVisit(false);
+  }
+
+  const newVisit = () => {
+    setVisitAdded(true);
     setAddVisit(false);
   }
 
@@ -58,16 +65,16 @@ const VetVisits = (props) => {
             <Text style={styles.lastVisit}>Last Visit</Text>
             <View style={styles.visitDetails}>
               <View style={styles.subSection}>
-                <Text>Date: </Text>
+                <Text style={styles.visitStats}>Date: </Text>
                 <Text>{lastDate}</Text>
-                <Text>Doctor: </Text>
-                <Text>holder</Text>
-                <Text>Reason: </Text>
-                <Text>holder</Text>
+                <Text style={styles.visitStats}>Doctor: </Text>
+                <Text>{lastVisit.vet}</Text>
+                <Text style={styles.visitStats}>Reason: </Text>
+                <Text>{lastVisit.visit_reason}</Text>
               </View>
               <View style={styles.noteSection}>
                 <Text style={styles.notesTitle}>Visit Notes</Text>
-                <Text>Visit Details</Text>
+                <Text>{lastVisit.visit_notes}</Text>
               </View>
             </View>
           </View>
@@ -75,7 +82,7 @@ const VetVisits = (props) => {
             <TouchableOpacity onPress={() => setAddVisit(true)}>
               <Text>Add Visit</Text>
             </TouchableOpacity>
-            <AddVisit back={closeAddModal} show={addVisit}/>
+            <AddVisit back={closeAddModal} show={addVisit} petID={props.petID} addVisit={newVisit}/>
           </View>
           <View style={styles.visitList}>
             {vetVisits.length !== 0
@@ -167,7 +174,7 @@ const styles = StyleSheet.create({
     width: '25%'
   },
   noteSection: {
-    width: '70%',
+    width: '65%',
     height: '125%',
     margin: 3,
     alignItems: 'center'
@@ -178,6 +185,11 @@ const styles = StyleSheet.create({
     marginBottom: 3,
     textDecorationLine: 'underline',
     textDecorationColor: '#8659A3'
+  },
+  visitStats: {
+    fontSize: 12,
+    marginTop: 5,
+    fontWeight: 'bold'
   },
 })
 

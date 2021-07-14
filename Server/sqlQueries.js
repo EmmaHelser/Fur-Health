@@ -73,13 +73,22 @@ module.exports = {
       if (err) {
         callback(err);
       } else {
-        db.con.query(`SELECT visit_date, visit_reason FROM vet_visits WHERE pet_id='${petID}' ORDER BY id DESC LIMIT 1;`, (err, data) => {
+        db.con.query(`SELECT visit_date, visit_reason, vet, visit_notes FROM vet_visits WHERE pet_id='${petID}' ORDER BY id DESC LIMIT 1;`, (err, data) => {
           if (err) {
             console.log(err);
           } else {
             callback(null, [data, visits]);
           }
         })
+      }
+    })
+  },
+  addVetVisit (petID, reason, doctor, notes, callback) {
+    db.con.query(`INSERT INTO vet_visits (pet_id, visit_reason, vet, visit_notes) VALUES ('${petID}', '${reason}', '${doctor}', '${notes}');`, (err, success) => {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, 'Visit logged!')
       }
     })
   }

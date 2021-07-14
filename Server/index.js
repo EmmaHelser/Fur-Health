@@ -35,3 +35,7 @@ app.post('/addWeight/:petID', (req, res) => {
 app.get('/getVetVisits/:petID', (req, res) => {
   controller.getVetVisits(req.params.petID, res);
 })
+
+app.post('/addVetVisits/:petID', (req, res) => {
+  controller.addNewVisit(req.params.petID, req.body, res);
+})

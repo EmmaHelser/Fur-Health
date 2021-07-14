@@ -34,10 +34,12 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: '15%',
     marginHorizontal: 50,
-    backgroundColor: '#D0B6E1',
+    backgroundColor: '#fff',
     height: '85%',
     width: 300,
-    borderRadius: 5
+    borderRadius: 5,
+    borderColor: '#D0B6E1',
+    borderWidth: 2
   },
   sectionTitle: {
     fontSize: 20,

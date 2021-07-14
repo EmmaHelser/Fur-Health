@@ -44,6 +44,7 @@ CREATE TABLE vet_visits (
   pet_id INT,
   visit_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   visit_reason VARCHAR(30) NOT NULL,
+  vet VARCHAR(20),
   visit_notes VARCHAR(1000) NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (pet_id) REFERENCES pet_profiles(id)

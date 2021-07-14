@@ -64,5 +64,14 @@ module.exports = {
         res.status(200).send(data);
       }
     })
+  },
+  addNewVisit: (petID, details, res) => {
+    queries.addVetVisit(petID, details.reason, details.doctor, details.notes, (err, success) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.status(201).send(success);
+      }
+    })
   }
  }
