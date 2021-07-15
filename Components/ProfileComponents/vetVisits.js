@@ -9,18 +9,22 @@ const VetVisits = (props) => {
   const [lastVisit, setLastVisit] = useState('');
   const [vetVisits, setVetVisits] = useState([]);
   const [addVisit, setAddVisit] = useState(false);
+  const [date, setDate] = useState('');
   const [visitAdded, setVisitAdded] = useState(false);
-  let lastDate = (lastVisit.visit_date !== undefined ? formatDate(lastVisit.visit_date) : '');
 
   useEffect(() => {
     getVisits();
     setVisitAdded(false);
   }, [props.show, visitAdded])
 
+  useEffect(() => {
+    getVisits()
+  }, [])
 
   const getVisits = () => {
     axios.get(`http://127.0.0.1:3001/getVetVisits/${props.petID}`)
       .then(response => {
+        setDate(formatDate(response.data[0][0].visit_date));
         setLastVisit(response.data[0][0]);
         setVetVisits(response.data[1]);
       })
@@ -44,7 +48,7 @@ const VetVisits = (props) => {
         <Text style={styles.sectionTitle}>Vet Visits</Text>
         <View style={styles.infoSection}>
           <Text>Last Visit: </Text>
-          <Text>{lastDate}</Text>
+          <Text>{date}</Text>
         </View>
       </View>
       <Modal
@@ -66,7 +70,7 @@ const VetVisits = (props) => {
             <View style={styles.visitDetails}>
               <View style={styles.subSection}>
                 <Text style={styles.visitStats}>Date: </Text>
-                <Text>{lastDate}</Text>
+                <Text>{date}</Text>
                 <Text style={styles.visitStats}>Doctor: </Text>
                 <Text>{lastVisit.vet}</Text>
                 <Text style={styles.visitStats}>Reason: </Text>
@@ -183,8 +187,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 16,
     marginBottom: 3,
-    textDecorationLine: 'underline',
-    textDecorationColor: '#8659A3'
   },
   visitStats: {
     fontSize: 12,

@@ -20,7 +20,7 @@ const Exercise = (props) => {
           <View style={styles.button}>
             <Button title='Back' onPress={() => props.close()}/>
           </View>
-          <Text>Exercise</Text>
+          <Text style={styles.title}>Exercise</Text>
         </View>
       </Modal>
     </View>
@@ -40,6 +40,14 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderColor: '#D0B6E1',
     borderWidth: 2
+  },
+  title: {
+    fontSize: 30,
+    alignItems: 'flex-start',
+    marginBottom: 30,
+    marginTop: 10,
+    textDecorationLine: 'underline',
+    textDecorationColor: '#8659A3'
   },
   sectionTitle: {
     fontSize: 20,
