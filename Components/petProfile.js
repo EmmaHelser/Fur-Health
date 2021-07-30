@@ -55,7 +55,7 @@ const PetProfile = (props) => {
         </View>
       </View>
       <Pressable style={styles.section} onPress={() => setShowWeights(true)}>
-        <WeightTracker pet={petInfo} petID={petInfo.id} show={showWeights} close={closeSection}/>
+        <WeightTracker pet={petInfo} petID={petInfo.id} goal={petInfo.weight_goal} show={showWeights} close={closeSection}/>
       </Pressable>
       <Pressable style={styles.section} onPress={() => setShowHealth(true)}>
         <CareInstructions show={showHealth} petID={petInfo.id} close={closeSection}/>

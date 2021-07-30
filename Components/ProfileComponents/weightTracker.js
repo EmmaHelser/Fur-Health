@@ -6,7 +6,7 @@ import AddGoals from './addWeightGoals.js';
 
 export default function WeightTracker (props) {
   const [weightGoal, setWeightGoal] = useState('');
-  const [goalWeight, setGoalWeight] = useState('');
+  const [goalWeight, setGoalWeight] = useState(props.goal);
   const [weightStatus, setWeightStatus] = useState('');
   const [pastWeights, setPastWeights] = useState([]);
   const [showGoals, setShowGoals] = useState(false);

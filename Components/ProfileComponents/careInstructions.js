@@ -1,7 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet, Modal, Button} from 'react-native';
+import {View, Text, StyleSheet, Modal, Button, TextInput, TouchableOpacity} from 'react-native';
+import UpdateDiet from './updateDiet.js';
 
 const CareInstructions = (props) => {
+  const {updateDiet, setDiet} = useState(false);
+
   return (
     <View>
       <View>
@@ -23,9 +26,18 @@ const CareInstructions = (props) => {
           <Text style={styles.title}>Care</Text>
           <View style={styles.sections}>
             <Text>Diet</Text>
+            <UpdateDiet show={updateDiet}/>
+            <TouchableOpacity onPress={() => setDiet(true)}>
+              <Text>Update Diet</Text>
+            </TouchableOpacity>
           </View>
           <View style={styles.sections}>
             <Text>Medications</Text>
+            <Button title='Update Medications'/>
+          </View>
+          <View style={styles.sections}>
+            <Text>Daily Routine</Text>
+            <Button title='Update Routine'/>
           </View>
         </View>
       </Modal>
