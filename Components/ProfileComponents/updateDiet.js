@@ -12,11 +12,27 @@ const UpdateDiet = (props) => {
         setModalVisible(!modalOn);
       }}
     >
-      <View>
+      <View style={styles.container}>
         <Text>Update Diet</Text>
       </View>
     </Modal>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    alignSelf: 'center',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    marginTop: '50%',
+    backgroundColor: '#D0B6E1',
+    height: '45%',
+    width: '73%',
+    // borderWidth: 2,
+    // borderColor: '#F7EDFE',
+    padding: '3%',
+    borderRadius: 5
+  },
+})
 
 export default UpdateDiet;
