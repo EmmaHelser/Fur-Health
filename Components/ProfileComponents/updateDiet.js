@@ -13,6 +13,7 @@ const UpdateDiet = (props) => {
       }}
     >
       <View style={styles.container}>
+        <Button title='Back' onPress={() => props.close()}/>
         <Text>Update Diet</Text>
       </View>
     </Modal>

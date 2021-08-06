@@ -3,7 +3,11 @@ import {View, Text, StyleSheet, Modal, Button, TextInput, TouchableOpacity} from
 import UpdateDiet from './updateDiet.js';
 
 const CareInstructions = (props) => {
-  const {updateDiet, setDiet} = useState(false);
+  const [updateDiet, setDiet] = useState(false);
+
+  const closeUpdateDiet = () => {
+    setDiet(false);
+  }
 
   return (
     <View>
@@ -26,10 +30,10 @@ const CareInstructions = (props) => {
           <Text style={styles.title}>Care</Text>
           <View style={styles.sections}>
             <Text>Diet</Text>
-            <UpdateDiet show={updateDiet}/>
             <TouchableOpacity onPress={() => setDiet(true)}>
               <Text>Update Diet</Text>
             </TouchableOpacity>
+            <UpdateDiet show={updateDiet} close={closeUpdateDiet}/>
           </View>
           <View style={styles.sections}>
             <Text>Medications</Text>
